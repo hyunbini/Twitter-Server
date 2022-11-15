@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `twitter`.`user` (
   `age` INT NOT NULL,
   `id` VARCHAR(45) NOT NULL,
   `pwd` VARCHAR(45) NOT NULL,
+  `nickname` VARCHAR(45) NOT NULL,
   `interest_id` VARCHAR(15) NOT NULL,
   `region_region_id` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`user_id`, `id`, `pwd`),
@@ -57,9 +58,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `twitter`.`post` (
   `post_id` INT NOT NULL AUTO_INCREMENT,
   `writer_id` VARCHAR(45) NOT NULL,
-  `content` TEXT NULL DEFAULT NULL,
+  `content` TEXT NOT NULL,
   `num_of_likes` INT NULL DEFAULT NULL,
-  `written_date` DATETIME NULL DEFAULT NULL,
+  `written_date` DATETIME NOT NULL,
   PRIMARY KEY (`post_id`, `writer_id`),
   INDEX `fk_post_user1_idx` (`writer_id` ASC) VISIBLE,
   CONSTRAINT `fk_post_user1`
@@ -78,7 +79,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `twitter`.`comment` (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
   `post_post_id` INT NOT NULL,
-  `content` TEXT NULL DEFAULT NULL,
+  `content` TEXT NOT NULL,
   `writer_id` VARCHAR(45) NOT NULL,
   `num_of_likes` INT NULL DEFAULT NULL,
   PRIMARY KEY (`comment_id`, `post_post_id`, `writer_id`),
@@ -106,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `twitter`.`child_comment` (
   `child_id` INT NOT NULL AUTO_INCREMENT,
   `comment_comment_id` INT NOT NULL,
   `writer_id` VARCHAR(45) NOT NULL,
-  `content` TEXT NULL DEFAULT NULL,
+  `content` TEXT NOT NULL,
   PRIMARY KEY (`child_id`, `writer_id`, `comment_comment_id`),
   INDEX `fk_child_comment_comment1_idx` (`comment_comment_id` ASC) VISIBLE,
   INDEX `id_idx` (`writer_id` ASC) VISIBLE,
